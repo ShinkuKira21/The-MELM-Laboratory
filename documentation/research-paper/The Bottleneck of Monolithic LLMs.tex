@@ -97,9 +97,9 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \end{IEEEkeywords}
 
 \section{Introduction}
-	The exponential growth of Large Language Models (LLMs) delivers diminishing returns. This computational bottleneck now threatens the accessibility and sustainability of advanced AI. As the industry races toward models with trillions of parameters, we question whether monolithic scaling offers the optimal path forward. We argue that pursuing generalist intelligence through sheer size proves inherently inefficient: it generates high latency, consumes massive energy, and complicates specialised adaptation.
+	The exponential growth of Large Language Models (LLMs) delivers diminishing returns. This computational bottleneck now threatens the accessibility and sustainability of advanced AI. As the industry races toward models with trillions of parameters, we question whether monolithic scaling offers the optimal path forward.
 
-	We introduce the Modular Educative Language Model (MELM)—a novel architecture to address these limitations. Rather than a single, monolithic network, MELM deconstructs the parameter space into a dynamic, multithreaded ensemble of smaller, subject-specific modules. This design enables Just-In-Time (JIT) intelligence: we activate only the relevant modules for a given query. This facilitates real-time response, efficient fine-tuning, and more accurate, specialised outputs. We believe this approach can redefine efficiency and specialisation in natural language processing, with significant implications for fields such as Generative Engine Optimisation (GEO).
+	We introduce the Modular Educative Language Model (MELM)—a novel architecture to address these limitations. Rather than a single, monolithic network, MELM deconstructs the parameter space into a dynamic, multithreaded ensemble of smaller, subject-specific modules. This design enables Just-In-Time (JIT) \footnote{Note: "Just-In-Time" (JIT) here refers to the architectural principle of loading and activating modules only when needed, not to PHP's JIT compilation feature.} intelligence: we activate only the relevant modules for a given query. This facilitates real-time response, efficient fine-tuning, and more accurate, specialised outputs. We believe this approach can redefine efficiency and specialisation in natural language processing, with significant implications for fields such as Generative Engine Optimisation (GEO).
 
 	We argue that pursuing generalist intelligence through sheer size proves inherently inefficient: it generates high latency, consumes massive energy, and complicates specialised adaptation. 
 
@@ -129,7 +129,16 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \section{Literature Review}
 
 \section{Methodology}
-	\subsection{Research Hypothesis}
+	\subsection{Research Hypotheses}
+		This investigation tests three core hypotheses:
+
+		\begin{itemize}
+			\item \textbf{H1 (Latency-Specialisation Correlation):} Surgical weight-splitting into subject-specific modules (MELM) reduces Time to First Token (TTFT) by at least 60\% compared to monolithic architectures of equivalent cumulative parameter counts, whilst maintaining statistically equivalent domain-specific accuracy (±2\%).
+
+			\item \textbf{H2 (Orchestration Efficiency):} Parallel execution of subject-specific experts—achieved through either multithreaded Python Flask processes or concurrent JavaScript requests to distributed PHP endpoints—enables linear scaling of inference throughput with available hardware threads on ROCm/AMD platforms, reducing end-to-end latency for multi-domain queries by at least 35\% compared to sequential processing.
+
+			\item \textbf{H3 (Entropy Reduction through Isolation):} The physical removal of non-relevant parameter weights in specialised MELM modules reduces Cross-Domain Entropy—defined as the probability of output influence from unrelated domains—thereby lowering hallucination rates in technical tasks compared to dense, multi-tasking models.
+		\end{itemize}
 
 	\subsection{Objectives}
 
@@ -162,7 +171,7 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 	\begin{itemize}
 		\item MELM - Modular Educative Language Model.
 		\item LLM - Large Language Model.
-		\item JIT - Just-In-Time.
+		\item JIT - Just-In-Time.\footnote{Throughout this paper, "JIT" refers to the architectural principle of loading and activating modules only when needed, not to PHP's JIT compilation feature.}
 		\item GEO - Generative Engine Optimisation.
 		\item NLP - Natural Language Processing.
 	\end{itemize}
