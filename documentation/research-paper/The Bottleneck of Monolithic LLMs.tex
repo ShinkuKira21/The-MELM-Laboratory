@@ -99,6 +99,30 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \end{IEEEkeywords}
 
 \section{Introduction}
+	The exponential growth of Large Language Models (LLMs) delivers diminishing returns. This computational bottleneck now threatens the accessibility and sustainability of advanced AI. As the industry races toward models with trillions of parameters, we question whether monolithic scaling offers the optimal path forward. We argue that pursuing generalist intelligence through sheer size proves inherently inefficient: it generates high latency, consumes massive energy, and complicates specialised adaptation.
+
+	To address these limitations, we introduce the Modular Educative Language Model (MELM)—a novel architecture. Rather than a single, monolithic network, MELM deconstructs the parameter space into a dynamic, multithreaded ensemble of smaller, subject-specific modules. This design enables Just-In-Time (JIT) intelligence: we activate only the relevant modules for a given query. This facilitates real-time response, efficient fine-tuning, and more accurate, specialised outputs. We believe this approach can redefine efficiency and specialisation in natural language processing, with significant implications for fields such as Generative Engine Optimisation (GEO).
+
+	This paper makes the following contributions:
+	\begin{itemize}
+		\item \textbf{We analyse the monolithic bottleneck:} We formally examine the efficiency and scalability limitations inherent in current dense LLM architectures, framing the problem as one of resource under-utilisation and cross-domain interference.
+		\item \textbf{We introduce the MELM architecture:} We propose the Modular Educative Language Model (MELM), a novel framework that deconstructs monolithic models into a multithreaded ensemble of subject-specific experts, managed by a Just-In-Time (JIT) dispatcher.
+		\item \textbf{We establish theoretical foundations for weight-splitting:} We detail the theoretical underpinnings of surgical weight-splitting, drawing connections to—and differentiating our work from—existing techniques such as pruning, distillation, and Mixture of Experts (MoE).
+		\item \textbf{We present a proof-of-concept implementation strategy:} We outline a concrete, reproducible methodology for implementing and evaluating the MELM framework, leveraging open-source models, AMD ROCm for efficient inference, and a lightweight PHPue/Flask orchestration layer for parallel expert execution.
+	\end{itemize}
+
+	This paper proceeds as follows. We first analyse the key bottlenecks of current LLM architectures. We then detail the theoretical foundations of the MELM framework, outlining its weight-splitting mechanism and multithreaded training paradigm. Finally, we discuss the anticipated challenges and potential of this approach, proposing a path toward a new era of modular, efficient, and specialised AI.
+
+\section{Methodological Approach}
+	Our plan involves two potential paths, depending on the availability of resources and the complexity of the implementation. The first path involves carefully selecting a subset of a chosen LLM architecture, such as LLaMA, and applying surgical weight-splitting to create a modular ensemble of subject-specific experts.
+	
+	The second path involves designing a custom architecture from the ground up. Rather than extracting modules from a pre-trained network, this approach intentionally trains multiple smaller, domain-oriented models—inspired by principles of modular neural computation and sparse activation—that operate as specialised experts. These experts are coordinated through a routing mechanism responsible for identifying the subject domain of an incoming query and activating the relevant modules accordingly.
+	
+	In this architecture, each expert model would be trained on carefully curated domain-specific datasets, allowing for deeper specialisation within areas such as mathematics, programming, scientific reasoning, or general language tasks. A central orchestration layer would then manage module selection and parallel execution, enabling multiple experts to contribute to a response when a query spans multiple knowledge domains.
+	
+	The outputs of these experts would subsequently be aggregated or synthesised into a coherent response through a lightweight coordination model or response synthesis mechanism. This design aims to preserve the benefits of specialisation whilst maintaining the unified conversational behaviour expected of a modern language model.
+	
+	Compared to post-training weight decomposition, this approach provides greater architectural control and avoids the challenges associated with disentangling distributed knowledge from a dense neural network. However, it introduces new complexities in training coordination, dataset preparation, and expert routing. As such, the feasibility of this path will ultimately depend on available computational resources and the scalability of the training process.
 
 \section{Literature Review}
 
@@ -135,6 +159,10 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 	List of terminologies used in this document:-
 	\begin{itemize}
 		\item MELM - Modular Educative Language Model.
+		\item LLM - Large Language Model.
+		\item JIT - Just-In-Time.
+		\item GEO - Generative Engine Optimisation.
+		\item NLP - Natural Language Processing.
 	\end{itemize}
 	
 
