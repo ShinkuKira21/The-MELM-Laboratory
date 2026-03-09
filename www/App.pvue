@@ -1,0 +1,20 @@
+<!-- Author: Edward Patch -->
+<script>
+    @require Navbar 'components/Navbar.pvue';
+    #require 'views/index.pvue';
+</script>
+
+<header>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="assets/img/favicon_io/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/tailwind-styles.css">
+
+    <script defer src="/assets/js/fworks/alpine.min.js"></script>
+</header>
+
+<template>
+    <Navbar></Navbar>
+    <View></View>
+</template>

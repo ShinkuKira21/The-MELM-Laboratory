@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "build": "npx tailwindcss@3.4.0 -i assets/css/tailwind-src.css -o assets/css/tailwind-styles.css --minify"
+  }
+}
