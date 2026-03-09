@@ -108,8 +108,8 @@ T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 	This paper makes the following contributions:
 	\begin{itemize}
 		\item \textbf{We analyse the monolithic bottleneck:} We formally examine the efficiency and scalability limitations inherent in current dense LLM architectures, framing the problem as one of resource under-utilisation and cross-domain interference.
-		\item \textbf{We introduce the MELM architecture:} We propose the Modular Educative Language Model (MELM), a novel framework that deconstructs monolithic models into a multithreaded ensemble of subject-specific experts, managed by a Just-In-Time (JIT) dispatcher.
-		\item \textbf{We establish theoretical foundations for weight-splitting:} We detail the theoretical underpinnings of surgical weight-splitting, drawing connections to—and differentiating our work from—existing techniques such as pruning, distillation, and Mixture of Experts (MoE).
+		\item \textbf{We introduce the MELM architecture:} We propose the MELM, a novel framework that deconstructs monolithic models into a multithreaded ensemble of subject-specific experts, managed by a JIT dispatcher.
+		\item \textbf{We establish theoretical foundations for weight-splitting:} We detail the theoretical underpinnings of surgical weight-splitting, drawing connections to—and differentiating our work from—existing techniques such as pruning, distillation, and MoE.
 		\item \textbf{We present a proof-of-concept implementation strategy:} We outline a concrete, reproducible methodology for implementing and evaluating the MELM framework, leveraging open-source models, AMD ROCm for efficient inference, and a lightweight PHPue/Flask orchestration layer for parallel expert execution.
 	\end{itemize}
 
