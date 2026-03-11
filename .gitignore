@@ -1,3 +1,5 @@
 *.gz
 *.log
 *.blg
+/experiment/ROCm_Setup/checkpoints
+/experiment/ROCm_Setup/.ipynb_checkpoints
