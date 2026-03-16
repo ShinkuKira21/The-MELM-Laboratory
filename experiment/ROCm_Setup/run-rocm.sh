@@ -28,8 +28,8 @@ else
     # Create aliases if they don't exist
     cat > ~/.rocm_aliases << 'EOF'
 # ROCm Docker aliases
-alias rocm-python="docker exec -w /workspace rocm-dev /opt/rocm-venv/bin/python"
-alias rocm-jupyter="docker exec -w /workspace rocm-dev /opt/rocm-venv/bin/jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''"
+alias rocm-python="docker exec -w /workspace rocm-dev /opt/rocm-venv/bin/python_wrapper.sh"
+alias rocm-jupyter="docker exec -w /workspace rocm-dev /opt/rocm-venv/bin/python_wrapper.sh -m jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''"
 alias rocm-pip="docker exec -w /workspace rocm-dev /opt/rocm-venv/bin/pip"
 alias rocm-bash="docker exec -it rocm-dev bash"
 EOF

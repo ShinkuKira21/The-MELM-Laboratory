@@ -12,6 +12,20 @@ import subprocess
 import psutil
 from datetime import datetime
 
+print(f"Torch version: {torch.__version__}")
+print(f"CUDA available: {torch.cuda.is_available()}")
+
+if torch.cuda.is_available():
+    # Now we only check GPU 0
+    props = torch.cuda.get_device_properties(0)
+    mem_gb = props.total_memory / 1e9
+    name = props.name
+    
+    print(f"✅ Active GPU: {name} ({mem_gb:.2f} GB)")
+    
+    x = torch.randn(3,3).to('cuda:0')
+    print(f"Tensor on: {x.device}")
+
 def print_header(text):
     """Print a formatted header"""
     print("\n" + "="*60)
