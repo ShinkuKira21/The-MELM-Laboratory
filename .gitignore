@@ -1,3 +1,15 @@
 *.gz
 *.log
 *.blg
+/experiment/ROCm_Setup/checkpoints
+/experiment/ROCm_Setup/.ipynb_checkpoints
+/experiment/ROCm_Setup/Scalpel-Method
+
+/experiment/Scalpel-Method/architecture-2.2/data
+
+/documentation/architecture-3
+
+__pycache__
+artifacts
+benchmarks
+data

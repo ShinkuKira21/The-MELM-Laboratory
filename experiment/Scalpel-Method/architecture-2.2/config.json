@@ -1,0 +1,30 @@
+{
+  "base_model": "gpt2",
+  "categories": ["Science", "History", "Literature"],
+  "artifacts_dir": "artifacts",
+  "router": {
+    "enabled": true,
+    "type": "keyword",
+    "top_k": 2,
+    "threshold": 0.0,
+    "output_path": "artifacts/router/router.json"
+  },
+  "melm": {
+    "output_dir": "artifacts/melms",
+    "response_style": "fragmented",
+    "max_new_tokens": 96,
+    "temperature": 0.7,
+    "top_p": 0.95
+  },
+  "llm": {
+    "enabled": true,
+    "max_new_tokens": 160,
+    "temperature": 0.7,
+    "top_p": 0.95
+  },
+  "logging": {
+    "run_dir": "artifacts/runs",
+    "write_events_jsonl": true
+  }
+}
+

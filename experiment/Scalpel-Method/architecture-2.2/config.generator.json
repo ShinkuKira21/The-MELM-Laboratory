@@ -1,0 +1,27 @@
+{
+  "base_model": "gpt2",
+  "domains": ["History", "Science", "Physics", "Chemistry", "Biology", "Programming", "Language"],
+  "data": {
+    "train": "data/domain_train.jsonl",
+    "valid": "data/domain_valid.jsonl"
+  },
+  "router": {
+    "batch_size": 16,
+    "epochs": 3,
+    "lr": 0.0002,
+    "max_length": 256,
+    "top_k": 2,
+    "threshold": 0.35
+  },
+  "split": {
+    "importance": "fisher",
+    "shared_ratio": 0.05,
+    "expert_ratio": 0.2,
+    "max_batches": 64,
+    "seed": 7
+  },
+  "export": {
+    "output_dir": "artifacts"
+  }
+}
+

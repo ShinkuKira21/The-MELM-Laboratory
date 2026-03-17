@@ -1,0 +1,31 @@
+{
+  "base_model": "gpt2",
+  "artifacts": {
+    "root": "artifacts",
+    "router_dir": "artifacts/router",
+    "experts_dir": "artifacts/experts",
+    "melms_dir": "artifacts/melms",
+    "runs_dir": "artifacts/runs"
+  },
+  "router": {
+    "type": "trained",
+    "checkpoint_path": "artifacts/router/router.pt",
+    "manifest_path": "artifacts/router/router_manifest.json",
+    "top_k": 2,
+    "threshold": 0.35
+  },
+  "melm": {
+    "max_new_tokens": 96,
+    "temperature": 0.7,
+    "top_p": 0.95
+  },
+  "final_llm": {
+    "enabled": true,
+    "max_new_tokens": 160,
+    "temperature": 0.7,
+    "top_p": 0.95
+  },
+  "logging": {
+    "write_events_jsonl": true
+  }
+}
