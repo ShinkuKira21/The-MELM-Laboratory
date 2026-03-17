@@ -2,25 +2,28 @@
 
 # cleanup.sh - Remove ROCm Docker container
 
+PROJECT_NAME=$(basename "$(dirname "$PWD")") 
+CONTAINER_NAME="rocm-$PROJECT_NAME"
+
 echo "🧹 Cleaning up ROCm Docker container..."
 
 # Check if container exists
-if docker ps -a --format '{{.Names}}' | grep -q "^rocm-dev$"; then
-    echo "Found container 'rocm-dev'"
+if docker ps -a --format '{{.Names}}' | grep -q "^$CONTAINER_NAME$"; then
+    echo "Found container '$CONTAINER_NAME'"
     
     # Stop the container if it's running
-    if docker ps --format '{{.Names}}' | grep -q "^rocm-dev$"; then
+    if docker ps --format '{{.Names}}' | grep -q "^$CONTAINER_NAME$"; then
         echo "Stopping container..."
-        docker stop rocm-dev
+        docker stop $CONTAINER_NAME
     fi
     
     # Remove the container
     echo "Removing container..."
-    docker rm rocm-dev
+    docker rm $CONTAINER_NAME
     
-    echo "✅ Container 'rocm-dev' has been removed"
+    echo "✅ Container '$CONTAINER_NAME' has been removed"
 else
-    echo "❌ Container 'rocm-dev' not found"
+    echo "❌ Container '$CONTAINER_NAME' not found"
 fi
 
 # Optional: Remove any dangling images or cleanup Docker system

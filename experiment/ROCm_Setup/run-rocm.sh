@@ -2,16 +2,22 @@
 
 # run-rocm.sh - Start and connect to existing ROCm container
 
+# ----------------------------------------
+# Config
+# ----------------------------------------
+PROJECT_NAME=$(basename "$(dirname "$PWD")") 
+CONTAINER_NAME="rocm-$PROJECT_NAME"
+
 echo "🚀 Checking for existing ROCm container..."
 
 # Check if container exists
-if docker ps -a --format '{{.Names}}' | grep -q "^rocm-dev$"; then
-    echo "✅ Found container 'rocm-dev'"
+if docker ps -a --format '{{.Names}}' | grep -q "^$CONTAINER_NAME$"; then
+    echo "✅ Found container '$CONTAINER_NAME'"
     
     # Check if container is running
-    if ! docker ps --format '{{.Names}}' | grep -q "^rocm-dev$"; then
+    if ! docker ps --format '{{.Names}}' | grep -q "^$CONTAINER_NAME$"; then
         echo "🔄 Starting existing container..."
-        docker start rocm-dev
+        docker start "$CONTAINER_NAME"
     else
         echo "✅ Container already running"
     fi
@@ -20,24 +26,26 @@ else
     exit 1
 fi
 
-# Ensure aliases are loaded
-if [ -f ~/.rocm_aliases ]; then
-    source ~/.rocm_aliases
-    echo "✅ Aliases loaded"
-else
-    # Create aliases if they don't exist
-    cat > ~/.rocm_aliases << 'EOF'
-# ROCm Docker aliases
-alias rocm-python="docker exec -w /workspace rocm-dev /opt/rocm-venv/bin/python_wrapper.sh"
-alias rocm-jupyter="docker exec -w /workspace rocm-dev /opt/rocm-venv/bin/python_wrapper.sh -m jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''"
-alias rocm-pip="docker exec -w /workspace rocm-dev /opt/rocm-venv/bin/pip"
-alias rocm-bash="docker exec -it rocm-dev bash"
-EOF
-    source ~/.rocm_aliases
-    echo "✅ Aliases created and loaded"
-fi
+# ----------------------------------------
+# Temporary aliases for this session
+# ----------------------------------------
+echo "🔧 Setting up temporary aliases for this session..."
 
-# Print status
+alias rocm-python="docker exec -it -w /workspace $CONTAINER_NAME /opt/rocm-venv/bin/python_wrapper.sh"
+alias rocm-jupyter="docker exec -w /workspace $CONTAINER_NAME /opt/rocm-venv/bin/python_wrapper.sh -m jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''"
+alias rocm-pip="docker exec -w /workspace $CONTAINER_NAME /opt/rocm-venv/bin/pip"
+alias rocm-bash="docker exec -it $CONTAINER_NAME bash"
+
+# Verify aliases
+echo "✅ Aliases set:"
+alias rocm-python 2>/dev/null && echo "  rocm-python ✓" || echo "  rocm-python ✗"
+alias rocm-jupyter 2>/dev/null && echo "  rocm-jupyter ✓" || echo "  rocm-jupyter ✗"
+alias rocm-pip 2>/dev/null && echo "  rocm-pip ✓" || echo "  rocm-pip ✗"
+alias rocm-bash 2>/dev/null && echo "  rocm-bash ✓" || echo "  rocm-bash ✗"
+
+# ----------------------------------------
+# Status and usage info
+# ----------------------------------------
 echo ""
 echo "========================================================"
 echo "✅ ROCm container is ready!"
@@ -55,7 +63,9 @@ echo ""
 echo "Access Jupyter at: http://localhost:8888"
 echo "========================================================"
 
-# Optional: Run a quick test
+# ----------------------------------------
+# Optional: Quick GPU test
+# ----------------------------------------
 if [ "$1" == "--test" ]; then
     echo ""
     echo "🧪 Running quick GPU test..."
